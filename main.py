@@ -1,28 +1,23 @@
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+from sklearn.feature_extraction.text import TfidfVectorizer
 from cleaning import text_cleaner
 from stemming import stem_text
 
 
-text_list = []
+def text_tokenizer(text):
+    text = text_cleaner(text)
+    text = stem_text(text)
+    return [word for word in text if len(word)>3]
+        
+
 
 with open('true.csv', 'r', encoding='utf-8') as file:
+    text = []
     for  i, row  in enumerate(file.readlines()):
-        line = text_cleaner(row)
-        line = stem_text(line)
-        text_list.extend(line)
-        # print(i)
-        if i >=100:
+        text.append(row)
+        if i == 3:
             break
 
-bow = dict([[x,text_list.count(x)] for x in set(text_list)])
+vectorizer = TfidfVectorizer(tokenizer=text_tokenizer)
 
 
-
-
-
-wc = WordCloud()
-wc.generate_from_frequencies(bow)
-plt.imshow(wc, interpolation='bilinear')
-plt.axis("off")
-plt.show()
+print(X_transform.toarray())
