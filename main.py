@@ -12,8 +12,8 @@ with open('true.csv', 'r', encoding='utf-8') as file:
         line = stem_text(line)
         text_list.extend(line)
         # print(i)
-        # if i >=50:
-        #     break
+        if i >=100:
+            break
 
 bow = dict([[x,text_list.count(x)] for x in set(text_list)])
 
