@@ -19,5 +19,6 @@ with open('true.csv', 'r', encoding='utf-8') as file:
 
 vectorizer = TfidfVectorizer(tokenizer=text_tokenizer)
 
+X_transform = vectorizer.fit_transform(text)
 
 print(X_transform.toarray())
