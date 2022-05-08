@@ -63,10 +63,11 @@ pretty_table.add_column("Count", top_n_words_count[:10])
 pretty_table
 
 
+# Dzielenie zbioru
 X_df = mail_data['Message']
 Y_df = mail_data['Category']
 
-
+#Podzial na train i test set
 X_train, X_test, Y_train, Y_test = train_test_split(X_df, Y_df, test_size=0.2, random_state=3)
 
 
@@ -108,13 +109,22 @@ plt.show()
 
 # Testowanie modelu
 input_mail = ["I've been searching for the right words to thank you for this breather. I promise i wont take your help for granted and will fulfil my promise. You have been wonderful and a blessing at all times"]
+input_data_features = feature_extraction.transform(input_mail)
 
+print(f'Message: {input_mail} \n')
+prediction = model.predict(input_data_features)
+if (prediction[0]==1):
+  print('Result of classification: Not Spam')
+else:
+  print('Result of classification: Spam')
+
+
+input_mail = ["Winner! Free prize waiting for you right NOW! go to this site to collect the prize: www.scam.com"]
 input_data_features = feature_extraction.transform(input_mail)
 
 prediction = model.predict(input_data_features)
-print(prediction)
-
+print(f'\n\nMessage: {input_mail} \n')
 if (prediction[0]==1):
-  print('Not Spam')
+  print('Result of classification: Not Spam')
 else:
-  print('Spam')
+  print('Result of classification: Spam')
