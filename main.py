@@ -14,7 +14,7 @@ def text_tokenizer(text):
     text = stem_text(text)
     return [word for word in text if len(word)>3]
 
-
+#Wczytanie Danych
 reviews_df = pd.read_csv('alexa_reviews.csv', delimiter=";")
 reviews_df = reviews_df[['rating','verified_reviews']]
 
@@ -29,6 +29,7 @@ for row in reviews_df.verified_reviews:
 
 bow = dict([[x,text_list.count(x)] for x in set(text_list)])
 
+# Wordcloud:
 wc = WordCloud()
 wc.generate_from_frequencies(bow)
 plt.imshow(wc, interpolation='bilinear')
@@ -37,7 +38,7 @@ plt.show()
 
 
 
-#Czesc zwiazana z klasyfikacja:
+#Przygotowanie danych do klasyfikacji:
 
 feature_extraction = TfidfVectorizer(tokenizer=text_tokenizer)
 
@@ -55,7 +56,7 @@ Y_train = Y_train.astype(int)
 Y_test = Y_test.astype(int)
 
 
-# Tworzenie i uczenie modelu
+# Tworzenie, uczenie i testowanie modelu
 model = DecisionTreeClassifier(random_state=0)
 
 model.fit(X_train_features, Y_train)
