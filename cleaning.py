@@ -12,6 +12,7 @@ def text_cleaner( text_1 : str) -> str:
     #Remove numbers
     text_1 = re.sub('\d ','',text_1)
     #Remove HTML markers
+    #T.est
     text_1 = re.sub('<[^>]*>', '', text_1)
     #Remove Interpunction
     text_1 = re.sub('[^a-zA-Z^ ]',' ', text_1)
